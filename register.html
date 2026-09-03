@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>التسجيل — ألف المستقبل</title>
+<meta name="description" content="سجّل طفلك في برنامج فصول ألف لاكتشاف ورعاية الطلبة الموهوبين، خطوات بسيطة ونتيجة سريعة.">
+<link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header centered">
+  <div class="container">
+    <a href="index.html" class="logo"><img src="assets/logo.svg" alt="ألف المستقبل"></a>
+  </div>
+</header>
+
+<div id="register-wizard">
+
+  <div class="progress-wrap">
+    <div class="container">
+      <div class="progress-steps">
+        <div class="progress-step active"><span class="dot">1</span><span class="label">الطالب</span></div>
+        <span class="progress-line"></span>
+        <div class="progress-step"><span class="dot">2</span><span class="label">ولي الأمر</span></div>
+        <span class="progress-line"></span>
+        <div class="progress-step"><span class="dot">3</span><span class="label">المدرسة</span></div>
+        <span class="progress-line"></span>
+        <div class="progress-step"><span class="dot">4</span><span class="label">مراجعة</span></div>
+        <span class="progress-line"></span>
+        <div class="progress-step"><span class="dot">5</span><span class="label">تأكيد</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-wrap">
+    <div class="container" style="display:flex;justify-content:center">
+      <form id="register-form" class="form-card" novalidate>
+
+        <!-- Step 1: Student -->
+        <div class="form-step active">
+          <div class="form-title">
+            <h2>معلومات الطالب</h2>
+            <span>الخطوة 1 من 5</span>
+          </div>
+          <div class="field-grid">
+            <div class="field span-2">
+              <label for="student_name">اسم الطالب الثلاثي</label>
+              <input type="text" id="student_name" name="student_name" placeholder="مثال: سلطان عبدالله الحربي" required>
+            </div>
+            <div class="field">
+              <label for="student_dob">تاريخ الميلاد</label>
+              <input type="date" id="student_dob" name="student_dob" required>
+            </div>
+            <div class="field">
+              <label for="student_stage">المرحلة الدراسية</label>
+              <select id="student_stage" name="student_stage" required>
+                <option value="" disabled selected>اختر المرحلة</option>
+                <option>الابتدائية</option>
+                <option>المتوسطة</option>
+                <option>الثانوية</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-actions">
+            <span></span>
+            <button type="button" class="btn btn-primary" data-next>التالي</button>
+          </div>
+        </div>
+
+        <!-- Step 2: Parent -->
+        <div class="form-step">
+          <div class="form-title">
+            <h2>معلومات ولي الأمر</h2>
+            <span>الخطوة 2 من 5</span>
+          </div>
+          <div class="field-grid">
+            <div class="field span-2">
+              <label for="parent_name">اسم ولي الأمر الكامل</label>
+              <input type="text" id="parent_name" name="parent_name" placeholder="عبدالله سالم الحربي" required>
+            </div>
+            <div class="field">
+              <label for="parent_email">البريد الإلكتروني</label>
+              <input type="email" id="parent_email" name="parent_email" placeholder="abdullah.h@email.com" required>
+            </div>
+            <div class="field">
+              <label for="parent_phone">رقم الجوال</label>
+              <input type="tel" id="parent_phone" name="parent_phone" placeholder="05xxxxxxxx" pattern="05[0-9]{8}" required>
+            </div>
+            <div class="field span-2">
+              <label for="parent_relation">صلة القرابة بالطالب</label>
+              <select id="parent_relation" name="parent_relation" required>
+                <option>الأب</option>
+                <option>الأم</option>
+                <option>ولي أمر آخر</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn btn-ghost-light" data-back>رجوع</button>
+            <button type="button" class="btn btn-primary" data-next>التالي</button>
+          </div>
+        </div>
+
+        <!-- Step 3: School -->
+        <div class="form-step">
+          <div class="form-title">
+            <h2>المدرسة والفصل</h2>
+            <span>الخطوة 3 من 5</span>
+          </div>
+          <div class="field-grid">
+            <div class="field span-2">
+              <label for="school_name">اسم المدرسة</label>
+              <input type="text" id="school_name" name="school_name" placeholder="ابحث عن اسم المدرسة" required>
+            </div>
+            <div class="field span-2">
+              <label>هل سبق للطالب التسجيل في مقياس موهبة؟</label>
+              <div class="radio-row">
+                <label><input type="radio" name="prior_assessment" value="yes" required> نعم</label>
+                <label><input type="radio" name="prior_assessment" value="no"> لا</label>
+              </div>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn btn-ghost-light" data-back>رجوع</button>
+            <button type="button" class="btn btn-primary" data-next>التالي</button>
+          </div>
+        </div>
+
+        <!-- Step 4: Review -->
+        <div class="form-step" data-step="review">
+          <div class="form-title">
+            <h2>مراجعة والموافقة</h2>
+            <span>الخطوة 4 من 5</span>
+          </div>
+          <div class="review-summary">
+            <div class="review-row"><span class="k">اسم الطالب</span><span class="v" id="review-student-name">—</span></div>
+            <div class="review-row"><span class="k">المرحلة الدراسية</span><span class="v" id="review-student-stage">—</span></div>
+            <div class="review-row"><span class="k">اسم ولي الأمر</span><span class="v" id="review-parent-name">—</span></div>
+            <div class="review-row"><span class="k">البريد الإلكتروني</span><span class="v" id="review-parent-email">—</span></div>
+            <div class="review-row"><span class="k">رقم الجوال</span><span class="v" id="review-parent-phone">—</span></div>
+            <div class="review-row"><span class="k">المدرسة</span><span class="v" id="review-school-name">—</span></div>
+          </div>
+          <label class="consent-row">
+            <input type="checkbox" required>
+            أوافق على الشروط والأحكام وسياسة الخصوصية الخاصة بمنصة ألف، وأقر بصحة البيانات المُدخلة
+          </label>
+          <div class="form-actions">
+            <button type="button" class="btn btn-ghost-light" data-back>رجوع</button>
+            <button type="button" class="btn btn-primary" data-next>التالي</button>
+          </div>
+        </div>
+
+        <!-- Step 5: Confirm -->
+        <div class="form-step">
+          <div class="form-title">
+            <h2>تأكيد الإرسال</h2>
+            <span>الخطوة 5 من 5</span>
+          </div>
+          <p style="font:400 14px/1.9 Tajawal;color:var(--text-muted)">
+            بمجرد الضغط على "إرسال الطلب" سيصل بريد إلكتروني يحتوي على رقم الطلب، وسيتواصل معكم فريق ألف خلال 3 أيام عمل لاستكمال إجراءات المقياس.
+          </p>
+          <div class="form-actions">
+            <button type="button" class="btn btn-ghost-light" data-back>رجوع</button>
+            <button type="submit" class="btn btn-primary">إرسال الطلب</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<div id="register-success" style="display:none">
+  <div class="success-screen">
+    <span class="success-icon">
+      <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#22B07D" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg>
+    </span>
+    <h1>تم إرسال طلب التسجيل بنجاح!</h1>
+    <p>سيصلكم بريد إلكتروني يحتوي على رقم الطلب، وسيتواصل معكم فريق ألف خلال 3 أيام عمل لاستكمال إجراءات المقياس</p>
+    <div class="next-steps">
+      <h3>خطوات ما بعد التسجيل</h3>
+      <div class="next-step"><span class="n">1</span>مراجعة الطلب من فريق ألف — يوم عمل</div>
+      <div class="next-step"><span class="n">2</span>تطبيق مقياس موهبة — عن بُعد</div>
+      <div class="next-step"><span class="n">3</span>إشعار النتيجة وربط الطالب بالفصل المناسب</div>
+    </div>
+    <a href="index.html" class="btn btn-primary" style="margin-top:8px">العودة للصفحة الرئيسية</a>
+  </div>
+</div>
+
+<script src="js/site-data.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

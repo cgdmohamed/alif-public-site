@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>تسجيل الدخول — لوحة إدارة الموقع | ألف المستقبل</title>
+<link rel="icon" type="image/svg+xml" href="../assets/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<div class="login-shell">
+  <div class="login-card">
+    <div class="login-logo"><img src="../assets/logo.svg" alt="ألف المستقبل"></div>
+    <h1>لوحة إدارة الموقع</h1>
+    <p class="sub">سجّل الدخول لإدارة طلبات التسجيل والتواصل ومحتوى الموقع العام</p>
+
+    <div class="login-error" id="login-error">البريد الإلكتروني أو كلمة السر غير صحيحة</div>
+
+    <form id="login-form">
+      <div class="admin-field">
+        <label for="email">البريد الإلكتروني</label>
+        <input type="email" id="email" name="email" placeholder="admin@aleffuture.edu.sa" required autocomplete="username">
+      </div>
+      <div class="admin-field">
+        <label for="password">كلمة السر</label>
+        <input type="password" id="password" name="password" placeholder="••••••••••" required autocomplete="current-password">
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">تسجيل الدخول</button>
+    </form>
+
+    <div class="login-hint">
+      وضع تجريبي بدون خادم — بيانات الدخول:<br>
+      <strong>admin@aleffuture.edu.sa</strong> / <strong>AlefAdmin2026</strong>
+    </div>
+  </div>
+</div>
+
+<script src="../js/site-data.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var form = document.getElementById('login-form');
+    var errorBox = document.getElementById('login-error');
+    var submitBtn = form.querySelector('button[type=submit]');
+
+    AlefData.currentSession().then(function (session) {
+      if (session) window.location.href = 'index.html';
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      errorBox.classList.remove('show');
+      submitBtn.disabled = true;
+      AlefData.login(form.email.value.trim(), form.password.value).then(function () {
+        window.location.href = 'index.html';
+      }).catch(function (err) {
+        submitBtn.disabled = false;
+        errorBox.textContent = err.message || 'البريد الإلكتروني أو كلمة السر غير صحيحة';
+        errorBox.classList.add('show');
+      });
+    });
+  });
+</script>
+</body>
+</html>

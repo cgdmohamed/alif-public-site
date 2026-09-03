@@ -1,0 +1,42 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      # Coolify assigns a public domain and proxies it to this container's
+      # port 5522 — no manual domain/proxy setup needed.
+      - SERVICE_URL_APP_5522
+      - PORT=5522
+      # "db" resolves via Docker's internal network — Postgres is never
+      # exposed publicly. Password is Coolify-generated (see db service).
+      - DATABASE_URL=postgresql://alef:${SERVICE_PASSWORD_DB}@db:5432/alef_public_site
+      # Coolify-generated on first deploy; stable across restarts.
+      - SESSION_SECRET=${SERVICE_BASE64_64_SESSION}
+      # Required — set these in Coolify's environment variables UI.
+      - ADMIN_EMAIL=${ADMIN_EMAIL:?set ADMIN_EMAIL in Coolify's environment variables}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:?set ADMIN_PASSWORD in Coolify's environment variables}
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      - POSTGRES_USER=alef
+      - POSTGRES_PASSWORD=${SERVICE_PASSWORD_DB}
+      - POSTGRES_DB=alef_public_site
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U alef -d alef_public_site"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+    # Postgres stays private/internal — no ports or domain assigned, so
+    # it's reachable only from the "app" service on Docker's network.
+
+volumes:
+  db-data:
