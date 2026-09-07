@@ -92,8 +92,9 @@
           </div>
         </div>
 
-        <div class="panel-head"><h3>الأرقام الإحصائية</h3></div>
+        <div class="panel-head"><h3>الأرقام الإحصائية (الصفحة الرئيسية)</h3></div>
         <div class="panel-body pad">
+          <p style="font:400 12px var(--font);color:var(--text-muted-2);margin-bottom:14px">اترك الرقم فارغًا لإخفاء الإحصائية بالكامل من الموقع بدل عرض رقم غير حقيقي.</p>
           <div class="admin-form-grid">
             <div class="admin-field">
               <label for="stat1Num">الرقم الأول</label>
@@ -122,14 +123,191 @@
           </div>
         </div>
 
-        <div class="save-bar">
-          <span class="save-msg" id="content-save-msg">تم الحفظ بنجاح ✓</span>
-          <div style="display:flex;gap:10px">
-            <button type="button" class="btn btn-ghost-light btn-sm" id="content-reset">استعادة الافتراضي</button>
-            <button type="submit" class="btn btn-primary btn-sm">حفظ التغييرات</button>
+        <div class="panel-head"><h3>نتائج نفخر بها (صفحة "عن ألف")</h3></div>
+        <div class="panel-body pad">
+          <div class="admin-form-grid">
+            <div class="admin-field">
+              <label for="resultStat1Num">الرقم الأول</label>
+              <input type="text" id="resultStat1Num" name="resultStat1Num" placeholder="مثال: 94%">
+            </div>
+            <div class="admin-field">
+              <label for="resultStat1Label">وصف الرقم الأول</label>
+              <input type="text" id="resultStat1Label" name="resultStat1Label">
+            </div>
+            <div class="admin-field">
+              <label for="resultStat2Num">الرقم الثاني</label>
+              <input type="text" id="resultStat2Num" name="resultStat2Num">
+            </div>
+            <div class="admin-field">
+              <label for="resultStat2Label">وصف الرقم الثاني</label>
+              <input type="text" id="resultStat2Label" name="resultStat2Label">
+            </div>
+            <div class="admin-field">
+              <label for="resultStat3Num">الرقم الثالث</label>
+              <input type="text" id="resultStat3Num" name="resultStat3Num">
+            </div>
+            <div class="admin-field">
+              <label for="resultStat3Label">وصف الرقم الثالث</label>
+              <input type="text" id="resultStat3Label" name="resultStat3Label">
+            </div>
+            <div class="admin-field">
+              <label for="resultStat4Num">الرقم الرابع</label>
+              <input type="text" id="resultStat4Num" name="resultStat4Num">
+            </div>
+            <div class="admin-field">
+              <label for="resultStat4Label">وصف الرقم الرابع</label>
+              <input type="text" id="resultStat4Label" name="resultStat4Label">
+            </div>
           </div>
         </div>
+
+        <div class="panel-head"><h3>الفيديو التعريفي والتواصل الاجتماعي</h3></div>
+        <div class="panel-body pad">
+          <div class="admin-form-grid">
+            <div class="admin-field span-2">
+              <label for="introVideoUrl">رابط الفيديو التعريفي (الصفحة الرئيسية)</label>
+              <input type="url" id="introVideoUrl" name="introVideoUrl" placeholder="https://youtube.com/watch?v=...">
+            </div>
+            <div class="admin-field">
+              <label for="socialX">رابط حساب X</label>
+              <input type="url" id="socialX" name="socialX" placeholder="https://x.com/...">
+            </div>
+            <div class="admin-field">
+              <label for="socialInstagram">رابط Instagram</label>
+              <input type="url" id="socialInstagram" name="socialInstagram" placeholder="https://instagram.com/...">
+            </div>
+            <div class="admin-field">
+              <label for="socialYoutube">رابط YouTube</label>
+              <input type="url" id="socialYoutube" name="socialYoutube" placeholder="https://youtube.com/@...">
+            </div>
+          </div>
+        </div>
+
+        <div class="save-bar">
+          <span class="save-msg" id="content-save-msg">تم الحفظ بنجاح ✓</span>
+          <button type="submit" class="btn btn-primary btn-sm">حفظ التغييرات</button>
+        </div>
       </form>
+
+      <div class="admin-panel" id="testimonials-editor" style="margin-top:24px">
+        <div class="panel-head"><h3>آراء أولياء الأمور</h3></div>
+        <div class="panel-body">
+          <div class="collection-list" data-list></div>
+          <form class="collection-add-form" data-add-form>
+            <div class="admin-form-grid">
+              <div class="admin-field span-2">
+                <label>الاقتباس</label>
+                <textarea name="quote" required></textarea>
+              </div>
+              <div class="admin-field">
+                <label>اسم ولي الأمر</label>
+                <input type="text" name="authorName" required>
+              </div>
+              <div class="admin-field">
+                <label>الصفة</label>
+                <input type="text" name="authorRole" placeholder="ولي أمر — الصف الرابع">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm">إضافة رأي</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="admin-panel" id="team-editor" style="margin-top:24px">
+        <div class="panel-head"><h3>أخصائيو الموهبة (صفحة "عن ألف")</h3></div>
+        <div class="panel-body">
+          <div class="collection-list" data-list></div>
+          <form class="collection-add-form" data-add-form>
+            <div class="admin-form-grid">
+              <div class="admin-field">
+                <label>الاسم</label>
+                <input type="text" name="name" required>
+              </div>
+              <div class="admin-field">
+                <label>المسمى الوظيفي</label>
+                <input type="text" name="role" placeholder="أخصائي موهبة — رياضيات">
+              </div>
+              <div class="admin-field span-2">
+                <label>رابط الصورة (اختياري)</label>
+                <input type="url" name="photoUrl">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm">إضافة عضو</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="admin-panel" id="events-editor" style="margin-top:24px">
+        <div class="panel-head"><h3>فعاليات قادمة</h3></div>
+        <div class="panel-body">
+          <div class="collection-list" data-list></div>
+          <form class="collection-add-form" data-add-form>
+            <div class="admin-form-grid">
+              <div class="admin-field span-2">
+                <label>عنوان الفعالية</label>
+                <input type="text" name="title" required>
+              </div>
+              <div class="admin-field">
+                <label>التاريخ</label>
+                <input type="date" name="eventDate">
+              </div>
+              <div class="admin-field">
+                <label>الوصف</label>
+                <input type="text" name="description">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm">إضافة فعالية</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="admin-panel" id="gallery-editor" style="margin-top:24px">
+        <div class="panel-head"><h3>منتجات الطلبة (معرض الصفحة الرئيسية)</h3></div>
+        <div class="panel-body">
+          <div class="collection-list" data-list></div>
+          <form class="collection-add-form" data-add-form>
+            <div class="admin-form-grid">
+              <div class="admin-field">
+                <label>عنوان العمل</label>
+                <input type="text" name="title" required>
+              </div>
+              <div class="admin-field">
+                <label>رابط الصورة (اختياري)</label>
+                <input type="url" name="imageUrl">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm">إضافة عمل</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="admin-panel" id="clips-editor" style="margin-top:24px">
+        <div class="panel-head"><h3>مقاطع فيديو ("لحظات من لقاءاتنا")</h3></div>
+        <div class="panel-body">
+          <div class="collection-list" data-list></div>
+          <form class="collection-add-form" data-add-form>
+            <div class="admin-form-grid">
+              <div class="admin-field span-2">
+                <label>عنوان المقطع</label>
+                <input type="text" name="title" required>
+              </div>
+              <div class="admin-field span-2">
+                <label>رابط الفيديو (embed)</label>
+                <input type="url" name="videoUrl" placeholder="https://www.youtube.com/embed/...">
+              </div>
+              <div class="admin-field">
+                <label>المدة</label>
+                <input type="text" name="durationLabel" placeholder="2:14 دقيقة">
+              </div>
+              <div class="admin-field">
+                <label>الوصف</label>
+                <input type="text" name="description">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm">إضافة مقطع</button>
+          </form>
+        </div>
+      </div>
     </main>
   </div>
 </div>
@@ -137,5 +315,6 @@
 <script src="../js/site-data.js"></script>
 <script src="js/admin.js"></script>
 <script src="js/content.js"></script>
+<script src="js/collections.js"></script>
 </body>
 </html>

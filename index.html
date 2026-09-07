@@ -41,14 +41,14 @@
       <p data-cms="heroSubtitle">منصّة متكاملة تمكّن مدرستكم من تطبيق مقاييس الموهبة، وربط الطلبة بمدربين متخصصين ولقاءات مباشرة، مع تقارير أداء تصل لأولياء الأمور أولًا بأول.</p>
       <div class="hero-ctas">
         <a href="register.html" class="btn btn-primary">اطلب شراكة لمدرستك</a>
-        <a href="watch.html" class="btn btn-ghost">
+        <a href="#" class="btn btn-ghost" data-cms-href="introVideoUrl" data-cms-hide-empty="introVideoUrl" target="_blank" rel="noopener">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
           شاهد الفيديو التعريفي
         </a>
       </div>
       <span class="parent-link">ولي أمر؟ <a href="about.html">تعرّف على فوائد البرنامج لطفلك ←</a></span>
     </div>
-    <a href="watch.html" class="hero-media" aria-label="شاهد الفيديو التعريفي">
+    <a href="#" class="hero-media" data-cms-href="introVideoUrl" data-cms-hide-empty="introVideoUrl" target="_blank" rel="noopener" aria-label="شاهد الفيديو التعريفي">
       <span class="play-btn">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="#4338F2"><path d="M8 5v14l11-7z"/></svg>
       </span>
@@ -64,10 +64,10 @@
       <span class="eyebrow">من نحن</span>
       <h2>نساعد مدرستكم على اكتشاف مواهب طلابها</h2>
       <p>منصة ألف تُبنى بالشراكة مع إدارات المدارس لتطبيق مقاييس موهبة معتمدة، وتوفير مدربين متخصصين ولوحة متابعة كاملة — مع إبقاء أولياء الأمور على اطلاع مستمر بتقدّم أبنائهم.</p>
-      <div class="stat-row">
-        <div><div class="num" data-cms="stat1Num">4,280+</div><div class="label" data-cms="stat1Label">طالب موهوب</div></div>
-        <div><div class="num" data-cms="stat2Num">86</div><div class="label" data-cms="stat2Label">مدرسة شريكة</div></div>
-        <div><div class="num" data-cms="stat3Num">312</div><div class="label" data-cms="stat3Label">مدرب متخصص</div></div>
+      <div class="stat-row" data-cms-autohide-section>
+        <div data-cms-hide-empty="stat1Num"><div class="num" data-cms="stat1Num"></div><div class="label" data-cms="stat1Label">طالب موهوب</div></div>
+        <div data-cms-hide-empty="stat2Num"><div class="num" data-cms="stat2Num"></div><div class="label" data-cms="stat2Label">مدرسة شريكة</div></div>
+        <div data-cms-hide-empty="stat3Num"><div class="num" data-cms="stat3Num"></div><div class="label" data-cms="stat3Label">مدرب متخصص</div></div>
       </div>
     </div>
   </div>
@@ -133,25 +133,19 @@
   </div>
 </section>
 
-<section>
+<section data-cms-collection-section>
   <div class="container">
     <div class="section-head split">
       <div class="titles">
         <span class="eyebrow">منتجات الطلبة</span>
         <h2>أعمال يفخر بها طلابنا</h2>
       </div>
-      <a href="about.html" class="btn-sm" style="color:var(--indigo);font-weight:600">عرض الكل ←</a>
     </div>
-    <div class="grid-4">
-      <div class="gallery-item">مشروع علمي: نموذج الطاقة الشمسية</div>
-      <div class="gallery-item">رسم فني: لوحة تعبيرية</div>
-      <div class="gallery-item">روبوت متسابق — نادي الابتكار</div>
-      <div class="gallery-item">عرض تقديمي: مشروع ريادي</div>
-    </div>
+    <div class="grid-4" id="gallery-grid"></div>
   </div>
 </section>
 
-<section class="section-navy">
+<section class="section-navy" data-cms-collection-section>
   <div class="container">
     <div class="section-head split">
       <div class="titles">
@@ -159,75 +153,27 @@
         <h2>لا تفوّت فعالياتنا</h2>
       </div>
     </div>
-    <div class="grid-3">
-      <div class="event-card">
-        <span class="date">10 أغسطس 2026</span>
-        <span class="title">معرض المشاريع العلمية السنوي</span>
-        <span class="desc">عرض حي لأفضل 40 مشروعًا لطلبة البرنامج</span>
-      </div>
-      <div class="event-card">
-        <span class="date">22 أغسطس 2026</span>
-        <span class="title">مخيم الروبوتات الصيفي</span>
-        <span class="desc">أسبوع مكثف لبناء وبرمجة الروبوتات التنافسية</span>
-      </div>
-      <div class="event-card">
-        <span class="date">5 سبتمبر 2026</span>
-        <span class="title">ملتقى أولياء الأمور الفصلي</span>
-        <span class="desc">لقاء تعريفي بمستجدات البرنامج والتقارير</span>
-      </div>
-    </div>
+    <div class="grid-3" id="events-grid"></div>
   </div>
 </section>
 
-<section>
+<section data-cms-collection-section>
   <div class="container">
     <div class="section-head center">
       <span class="eyebrow">لحظات من لقاءاتنا</span>
       <h2>شاهد ألف في الميدان</h2>
     </div>
-    <div class="grid-3">
-      <a class="clip-item" href="watch.html">
-        <span class="play-btn"><svg viewBox="0 0 24 24" fill="#4338F2"><path d="M8 5v14l11-7z"/></svg></span>
-      </a>
-      <a class="clip-item" href="watch.html">
-        <span class="play-btn"><svg viewBox="0 0 24 24" fill="#4338F2"><path d="M8 5v14l11-7z"/></svg></span>
-      </a>
-      <a class="clip-item" href="watch.html">
-        <span class="play-btn"><svg viewBox="0 0 24 24" fill="#4338F2"><path d="M8 5v14l11-7z"/></svg></span>
-      </a>
-    </div>
+    <div class="grid-3" id="clips-grid"></div>
   </div>
 </section>
 
-<section class="section-tinted" id="testimonials">
+<section class="section-tinted" id="testimonials" data-cms-collection-section>
   <div class="container">
     <div class="section-head center">
       <span class="eyebrow">آراء أولياء الأمور</span>
       <h2>ثقة أهالينا وسامنا</h2>
     </div>
-    <div class="grid-3">
-      <figure class="testimonial">
-        <q>لاحظت تطورًا كبيرًا في ثقة ابنتي بنفسها وشغفها بالرياضيات خلال 3 أشهر فقط في البرنامج</q>
-        <figcaption class="person">
-          <span class="avatar" style="background:#4338F2"></span>
-          <div><div class="name">عبدالله الحربي</div><div class="role">ولي أمر — لمى، الصف السادس</div></div>
-        </figcaption>
-      </figure>
-      <figure class="testimonial">
-        <q>التقارير الدورية والتواصل المستمر من المدربين أعطاني راحة بال كاملة كأم</q>
-        <figcaption class="person">
-          <span class="avatar" style="background:#807FF9"></span>
-          <div><div class="name">منى القرني</div><div class="role">ولية أمر — سلطان، الصف الرابع</div></div>
-        </figcaption>
-      </figure>
-      <figure class="testimonial">
-        <q>ابني أصبح ينتظر لقاءات نادي الروبوتات كل أسبوع، شكرًا لفريق ألف الرائع</q>
-        <figcaption class="person">
-          <span class="avatar" style="background:#3FA9F5"></span>
-          <div><div class="name">فهد المالكي</div><div class="role">ولي أمر — سعود، الصف الخامس</div></div>
-        </figcaption>
-      </figure>
-    </div>
+    <div class="grid-3" id="testimonials-grid"></div>
   </div>
 </section>
 
@@ -268,18 +214,17 @@
       <div class="footer-col">
         <h4>تابعنا</h4>
         <div class="social-row">
-          <a href="#" aria-label="X"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.6 8.7L23.3 22h-6.8l-5.3-6.9L4.9 22H2l8.1-9.3L1 2h7l4.8 6.3L18.9 2z"/></svg></a>
-          <a href="#" aria-label="Instagram"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/></svg></a>
-          <a href="#" aria-label="YouTube"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l6 3-6 3z" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" data-cms-href="socialX" data-cms-hide-empty="socialX" target="_blank" rel="noopener" aria-label="X"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.6 8.7L23.3 22h-6.8l-5.3-6.9L4.9 22H2l8.1-9.3L1 2h7l4.8 6.3L18.9 2z"/></svg></a>
+          <a href="#" data-cms-href="socialInstagram" data-cms-hide-empty="socialInstagram" target="_blank" rel="noopener" aria-label="Instagram"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" data-cms-href="socialYoutube" data-cms-hide-empty="socialYoutube" target="_blank" rel="noopener" aria-label="YouTube"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l6 3-6 3z" fill="currentColor" stroke="none"/></svg></a>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
       <span>© 2026 ألف المستقبل. جميع الحقوق محفوظة</span>
       <div class="links">
-        <a href="#">الشروط والأحكام</a>
-        <a href="#">سياسة الخصوصية</a>
-        <span>العربية ▾</span>
+        <a href="terms.html">الشروط والأحكام</a>
+        <a href="privacy.html">سياسة الخصوصية</a>
         <a href="admin/login.html" style="color:var(--text-muted)">لوحة الإدارة</a>
       </div>
     </div>

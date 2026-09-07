@@ -47,23 +47,45 @@
   function getContent() { return request('GET', '/content'); }
   function setContent(partial) { return request('PUT', '/content', partial); }
 
-  // Applies content (fetched from the server) to any element on the current
-  // page carrying a matching [data-cms] key. Safe no-op if the fetch fails
-  // (e.g. viewing the file directly without the server running) — the
-  // hard-coded defaults already in the HTML just stay as-is.
+  // Applies content (fetched from the server) to elements carrying a
+  // matching [data-cms] key (text), [data-cms-href] (link target), and
+  // hides [data-cms-hide-empty] elements whose key has no value yet — so a
+  // stat, link, or section with nothing entered in the CMS simply doesn't
+  // render instead of showing placeholder/fake numbers. Safe no-op if the
+  // fetch fails (e.g. viewing the file directly without the server running).
   function applyContentOverrides() {
     return getContent().then(function (content) {
       document.querySelectorAll('[data-cms]').forEach(function (el) {
         var key = el.getAttribute('data-cms');
-        if (Object.prototype.hasOwnProperty.call(content, key)) {
-          el.textContent = content[key];
-        }
+        if (content[key]) el.textContent = content[key];
+      });
+      document.querySelectorAll('[data-cms-href]').forEach(function (el) {
+        var key = el.getAttribute('data-cms-href');
+        if (content[key]) el.setAttribute('href', content[key]);
+      });
+      document.querySelectorAll('[data-cms-hide-empty]').forEach(function (el) {
+        var key = el.getAttribute('data-cms-hide-empty');
+        if (!content[key]) el.style.display = 'none';
+      });
+      // A section is only worth showing if at least one of its
+      // data-cms-hide-empty descendants ended up visible.
+      document.querySelectorAll('[data-cms-autohide-section]').forEach(function (section) {
+        var items = section.querySelectorAll('[data-cms-hide-empty]');
+        var anyVisible = Array.prototype.some.call(items, function (el) { return el.style.display !== 'none'; });
+        if (items.length && !anyVisible) section.style.display = 'none';
       });
       return content;
     }).catch(function (err) {
       console.warn('[site-data] could not load site content:', err.message);
     });
   }
+
+  // ---------- Generic CMS collections (testimonials, team, events, gallery, clips) ----------
+  function listCollection(name) { return request('GET', '/' + name); }
+  function getCollectionItem(name, id) { return request('GET', '/' + name + '/' + id); }
+  function createCollectionItem(name, data) { return request('POST', '/' + name, data); }
+  function updateCollectionItem(name, id, data) { return request('PATCH', '/' + name + '/' + id, data); }
+  function deleteCollectionItem(name, id) { return request('DELETE', '/' + name + '/' + id); }
 
   // ---------- Admin session ----------
   function login(email, password) {
@@ -97,6 +119,11 @@
     getContent: getContent,
     setContent: setContent,
     applyContentOverrides: applyContentOverrides,
+    listCollection: listCollection,
+    getCollectionItem: getCollectionItem,
+    createCollectionItem: createCollectionItem,
+    updateCollectionItem: updateCollectionItem,
+    deleteCollectionItem: deleteCollectionItem,
     login: login,
     logout: logout,
     currentSession: currentSession,

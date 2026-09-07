@@ -228,6 +228,18 @@ select.status-select{
 .save-msg{ font: 600 12px var(--font); color: var(--success); opacity: 0; transition: opacity .2s ease; }
 .save-msg.show{ opacity: 1; }
 
+/* ---------- Collection editors (testimonials/team/events/gallery/clips) ---------- */
+.collection-list{ display: flex; flex-direction: column; }
+.collection-row{
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 14px;
+  padding: 14px 22px; border-bottom: 1px solid var(--bg-lavender);
+}
+.collection-row:last-child{ border-bottom: none; }
+.collection-row-body{ font: 400 13px/1.7 var(--font); color: var(--text-body); }
+.collection-row-body strong{ color: var(--text-heading-2); display: block; font-weight: 700; }
+.collection-add-form{ padding: 18px 22px; border-top: 1px solid var(--bg-lavender); background: var(--bg-lavender-2); }
+.collection-add-form .admin-form-grid{ margin-bottom: 14px; }
+
 /* ---------- Login page ---------- */
 .login-shell{
   min-height: 100vh; display: flex; align-items: center; justify-content: center;

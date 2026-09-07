@@ -1,11 +1,98 @@
 // Alef Future — shared site behavior
 
+function alefEscapeHTML(str) {
+  var div = document.createElement('div');
+  div.textContent = str == null ? '' : String(str);
+  return div.innerHTML;
+}
+
+function alefFormatDate(iso) {
+  if (!iso) return '';
+  try {
+    return new Date(iso).toLocaleDateString('ar-SA', { year: 'numeric', month: 'long', day: 'numeric' });
+  } catch (e) {
+    return iso;
+  }
+}
+
+// Renders a CMS collection into #<gridId>, or hides the section holding it
+// (found via [data-cms-collection-section] or the nearest <section>) when
+// there's nothing to show yet — never falls back to placeholder content.
+function alefRenderCollection(gridId, items, renderItemHTML) {
+  var grid = document.getElementById(gridId);
+  if (!grid) return;
+  var section = grid.closest('[data-cms-collection-section]') || grid.closest('section');
+  if (!items || items.length === 0) {
+    if (section) section.style.display = 'none';
+    return;
+  }
+  grid.innerHTML = items.map(renderItemHTML).join('');
+}
+
 document.addEventListener('DOMContentLoaded', function () {
 
   // Apply any admin-edited content (hero text, stats, contact info) saved
   // via the admin panel's content editor.
   if (window.AlefData) {
     AlefData.applyContentOverrides();
+
+    if (document.getElementById('testimonials-grid')) {
+      AlefData.listCollection('testimonials').then(function (items) {
+        alefRenderCollection('testimonials-grid', items, function (t) {
+          return '<figure class="testimonial"><q>' + alefEscapeHTML(t.quote) + '</q>' +
+            '<figcaption class="person"><span class="avatar" style="background:#4338F2"></span>' +
+            '<div><div class="name">' + alefEscapeHTML(t.authorName) + '</div><div class="role">' + alefEscapeHTML(t.authorRole || '') + '</div></div>' +
+            '</figcaption></figure>';
+        });
+      }).catch(function () {});
+    }
+
+    if (document.getElementById('gallery-grid')) {
+      AlefData.listCollection('gallery').then(function (items) {
+        alefRenderCollection('gallery-grid', items, function (g) {
+          var bg = g.imageUrl
+            ? ' style="background-image:linear-gradient(0deg, rgba(5,4,94,0.6), rgba(5,4,94,0.05)), url(\'' + alefEscapeHTML(g.imageUrl) + '\');background-size:cover;background-position:center"'
+            : '';
+          return '<div class="gallery-item"' + bg + '>' + alefEscapeHTML(g.title) + '</div>';
+        });
+      }).catch(function () {});
+    }
+
+    if (document.getElementById('events-grid')) {
+      AlefData.listCollection('events').then(function (items) {
+        alefRenderCollection('events-grid', items, function (ev) {
+          return '<div class="event-card">' +
+            '<span class="date">' + alefEscapeHTML(alefFormatDate(ev.eventDate)) + '</span>' +
+            '<span class="title">' + alefEscapeHTML(ev.title) + '</span>' +
+            '<span class="desc">' + alefEscapeHTML(ev.description || '') + '</span>' +
+            '</div>';
+        });
+      }).catch(function () {});
+    }
+
+    if (document.getElementById('clips-grid')) {
+      AlefData.listCollection('clips').then(function (items) {
+        alefRenderCollection('clips-grid', items, function (c) {
+          return '<a class="clip-item" href="watch.html?id=' + encodeURIComponent(c.id) + '">' +
+            '<span class="play-btn"><svg viewBox="0 0 24 24" fill="#4338F2"><path d="M8 5v14l11-7z"/></svg></span>' +
+            '</a>';
+        });
+      }).catch(function () {});
+    }
+
+    if (document.getElementById('team-grid')) {
+      AlefData.listCollection('team').then(function (items) {
+        alefRenderCollection('team-grid', items, function (m) {
+          var avatar = m.photoUrl
+            ? '<span class="avatar-lg" style="background-image:url(\'' + alefEscapeHTML(m.photoUrl) + '\');background-size:cover;background-position:center"></span>'
+            : '<span class="avatar-lg"></span>';
+          return '<div class="specialist-card">' + avatar +
+            '<span class="name">' + alefEscapeHTML(m.name) + '</span>' +
+            '<span class="role">' + alefEscapeHTML(m.role || '') + '</span>' +
+            '</div>';
+        });
+      }).catch(function () {});
+    }
   }
 
   // Mobile nav toggle
@@ -158,27 +245,27 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // ---------- Watch page share links ----------
+  // Title is read at click time (not cached here) because watch.html loads
+  // its clip's real title asynchronously after DOMContentLoaded.
   var shareX = document.querySelector('[data-share="x"]');
   var shareWhatsapp = document.querySelector('[data-share="whatsapp"]');
   var copyLinkBtn = document.querySelector('[data-share="copy"]');
-  var pageUrl = window.location.href;
-  var pageTitle = document.title;
 
   if (shareX) {
     shareX.addEventListener('click', function () {
-      var url = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(pageTitle) + '&url=' + encodeURIComponent(pageUrl);
+      var url = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + '&url=' + encodeURIComponent(window.location.href);
       window.open(url, '_blank', 'noopener,noreferrer');
     });
   }
   if (shareWhatsapp) {
     shareWhatsapp.addEventListener('click', function () {
-      var url = 'https://wa.me/?text=' + encodeURIComponent(pageTitle + ' ' + pageUrl);
+      var url = 'https://wa.me/?text=' + encodeURIComponent(document.title + ' ' + window.location.href);
       window.open(url, '_blank', 'noopener,noreferrer');
     });
   }
   if (copyLinkBtn) {
     copyLinkBtn.addEventListener('click', function () {
-      navigator.clipboard.writeText(pageUrl).then(function () {
+      navigator.clipboard.writeText(window.location.href).then(function () {
         var original = copyLinkBtn.textContent;
         copyLinkBtn.textContent = 'تم نسخ الرابط!';
         setTimeout(function () { copyLinkBtn.textContent = original; }, 2000);
